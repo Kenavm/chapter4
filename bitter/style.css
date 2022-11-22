@@ -2,18 +2,32 @@ body {
 }
 
 main {
-    margin: 20px;
+   margin: 20px;
 }   
 
 #posts {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
 img {
-    width:60px;
+    width: 60px;
+    margin: 20px;
 }
 
 .input-group {
     width: 50%;
+}
+
+.container {
+    display: flex;
+    margin: 0%;
+}
+
+.delete-button {
+  margin: 20px;
+}
+
+.tweet {
+    margin: 20px;
 }

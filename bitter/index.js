@@ -2,7 +2,6 @@ const submitButton = document.getElementById("submit-button");
 const usernameInputField = document.getElementById("username");
 const tweetInputField = document.getElementById("tweet");
 const imageInputField = document.getElementById("image-upload");
-
 const POSTS = [
   {
     author: "Linus Torvalds",
@@ -29,35 +28,51 @@ function main() {
 
 function addTweetAndImageToPostElement() {
   for (const post of POSTS) {
-    createImageContainerAndAddImage(post);
     createTweetContainerAndAddTweet(post);
   }
 }
 function createTweetContainerAndAddTweet(post) {
+  let contentContainer = document.createElement("div");
+  contentContainer.classList.add("container");
   let newPostElement = document.createElement("div");
-  newPostElement = addPostToHTMLElement(post, newPostElement);
-  postsElement.appendChild(newPostElement);
-  return newPostElement;
-}
+  newPostElement.classList.add("tweet");
+  let newImageContainer = document.createElement("div");
 
+  newPostElement = addPostToHTMLElement(post, newPostElement);
+  newImageContainer = addImageToHTMLElement(post.avatar, newImageContainer);
+  contentContainer.appendChild(newImageContainer);
+  contentContainer.appendChild(newPostElement);
+  contentContainer.appendChild(addDeleteButton(`<button class ="delete-button" type="button" class="btn btn-secondary">Delete</button>`));
+  
+  postsElement.appendChild(contentContainer);
+}
+/*
 function createImageContainerAndAddImage(post) {
   let newImageContainer = document.createElement("div");
   newImageContainer = addImageToHTMLElement(post.avatar, newImageContainer);
   postsElement.appendChild(newImageContainer);
-  return newImageContainer;
 }
-
+*/
 function addPostToHTMLElement(post, newPostElement) {
   newPostElement.innerText = post.author + ": \n" + post.post;
   return newPostElement;
 }
 
 function addImageToHTMLElement(image, newImageContainer) {
-  newImageContainer.innerHTML = `<br><img src=${image}>`;
+  newImageContainer.innerHTML = `<img src=${image}>`;
   return newImageContainer;
 }
 
-main();
+function addDeleteButton(string) {
+  let div = document.createElement("div");
+  div.innerHTML = string.trim();
+  div.firstChild.addEventListener("click", deletePost);
+  return div.firstChild;
+}
+
+function deletePost() {
+  this.parentElement.remove();
+}
 
 submitButton.addEventListener("click", getNameTweetAndUpload);
 
@@ -67,7 +82,6 @@ function getNameTweetAndUpload() {
   let image = getUploadedImage();
 
   POSTS.push({ author: name, avatar: image, post: tweet });
-  createImageContainerAndAddImage({ author: name, avatar: image, post: tweet });
   createTweetContainerAndAddTweet({ author: name, avatar: image, post: tweet });
 }
 
@@ -87,3 +101,5 @@ function getUploadedImage() {
   image = image.replace(regex, "images/");
   return image;
 }
+
+main();
