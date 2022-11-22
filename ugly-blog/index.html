@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+        />
+        <title>Ugly Blog</title>
+        <link rel="stylesheet" href="./style.css" />
+        <script type="module" src="./src/index.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Ugly Posts</h1>
+        </header>
+
+        <main>
+            <div id="new-post"></div>
+            <div id="posts"></div>
+        </main>
+
+        <footer>
+            <div>
+                Total posts:
+                <span id="stats-total-posts"></span>
+            </div>
+            <div>
+                Last updated at:
+                <span id="stats-last-update"></span>
+            </div>
+        </footer>
+
+        <template id="post-template">
+            <div class="post">
+                <h2 class="post-title" name="title"></h2>
+                <div
+                    class="post-author"
+                    name="author"
+                ></div>
+                <div
+                    class="post-timestamp"
+                    name="timestamp"
+                ></div>
+                <div class="post-body" name="body"></div>
+
+                <button
+                    class="post-edit-button"
+                    id="post-edit-"
+                >
+                    Edit
+                </button>
+                <button
+                    class="post-delete-button"
+                    id="post-delete-"
+                >
+                    Delete
+                </button>
+            </div>
+        </template>
+
+        <template id="edit-post-template">
+            <form
+                class="edit-post"
+                id="edit-post-form-"
+                action="#"
+            >
+                <div class="form-error" hidden></div>
+
+                <div class="form-item">
+                    <label for="edit-post-title-">
+                        Title
+                    </label>
+                    <input
+                        class="form-input edit-post-input-title"
+                        id="edit-post-title-"
+                        name="title"
+                        type="text"
+                    />
+                </div>
+                <div class="form-item">
+                    <label for="edit-post-author-">
+                        Author
+                    </label>
+                    <input
+                        class="form-input edit-post-input-author"
+                        id="edit-post-author-"
+                        name="author"
+                        type="text"
+                    />
+                </div>
+                <div class="form-item">
+                    <label for="edit-post-body-">
+                        Body
+                    </label>
+                    <textarea
+                        class="form-input edit-post-input-body"
+                        id="edit-post-body-"
+                        name="body"
+                        type="text"
+                    ></textarea>
+                </div>
+
+                <button
+                    class="edit-post-submit"
+                    type="submit"
+                >
+                    Update
+                </button>
+
+                <button
+                    id="edit-post-cancel-"
+                    class="edit-post-cancel"
+                >
+                    Cancel
+                </button>
+            </form>
+        </template>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+:root {
+    --clr-bg-odd: #f0f0f0;
+    --clr-bg-even: #e4e4e4;
+}
+
+body {
+    font-size: 32px;
+    margin: 4em;
+}
+
+.holiday {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    background-color: var(--clr-bg-odd);
+    padding: 0.5em 1em;
+}
+
+.holiday:nth-child(even) {
+    background-color: var(--clr-bg-even);
+}
+
+.holiday .name {
+    font-weight: bold;
+}
+
+.holiday .countdown {
+    font-size: 0.8em;
+}

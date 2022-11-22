@@ -1,0 +1,50 @@
+body {
+    font-family: monospace;
+    font-size: 24px;
+
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calendar {
+    position: relative;
+    margin-top: 2em;
+}
+
+.year-title {
+    display: block;
+    background-color: lightgray;
+    border-radius: 1em;
+    margin-top: 0;
+    padding: 0.5em 2em;
+    text-align: center;
+}
+
+.months {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2em;
+}
+
+.month {
+}
+
+.month-days-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1em;
+
+    font-weight: bold;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 0 1em;
+}

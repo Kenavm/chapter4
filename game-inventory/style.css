@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    font-size: 24px;
+}
+
+main {
+    margin: 2em;
+}
+
+#inventory-items {
+    display: table;
+    border-spacing: 1em 0;
+}
+
+#inventory-items > .inventory-item {
+    display: table-row;
+
+    /* display: grid; */
+    /* grid-template-columns: repeat(4, 1fr); */
+    /* justify-content: flex-start; */
+    /* gap: 16px; */
+}
+
+#inventory-items > .inventory-item > * {
+    display: table-cell;
+}
+
+/* #inventory-items > .inventory-item > :not(:last-child) { */
+/*     margin-right: 1em; */
+/* } */

@@ -1,0 +1,19 @@
+body {
+}
+
+main {
+    margin: 20px;
+}   
+
+#posts {
+    display:flex;
+    flex-direction: column;
+}
+
+img {
+    width:60px;
+}
+
+.input-group {
+    width: 50%;
+}
