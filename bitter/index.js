@@ -46,13 +46,7 @@ function createTweetContainerAndAddTweet(post) {
   
   postsElement.appendChild(contentContainer);
 }
-/*
-function createImageContainerAndAddImage(post) {
-  let newImageContainer = document.createElement("div");
-  newImageContainer = addImageToHTMLElement(post.avatar, newImageContainer);
-  postsElement.appendChild(newImageContainer);
-}
-*/
+
 function addPostToHTMLElement(post, newPostElement) {
   newPostElement.innerText = post.author + ": \n" + post.post;
   return newPostElement;
