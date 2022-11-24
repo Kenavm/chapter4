@@ -10,14 +10,43 @@ function renderApp() {
 const app = renderApp();
 document.body.appendChild(app);
 
+let weekdays = [
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+    "Su",
+  ];
+
 function main() {
   let calendarDiv = createCalendar();
-  calendarDiv = getMonthsElements(calendarDiv);
+  getMonthsElements(calendarDiv);
+  createDropdown();
+}
+
+function createDropdown() {
+    let dropdownDiv = document.createElement('div');
+    let dropdown = `<div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Dropdown link
+    </a>
+  
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>`
+
+  dropdownDiv.innerHTML = dropdown;
+  body[0].append(dropdownDiv);
 }
 
 function createCalendar() {
   let calendarDiv = document.createElement("div");
-  calendarDiv.classList.add("calender");
+  calendarDiv.classList.add("calendar");
   let h1 = document.createElement("h1");
   h1.classList.add("year-title");
   h1.textContent = "Year 2022";
@@ -37,25 +66,32 @@ function getMonthsElements(calendarDiv) {
   }
 
   calendarDiv.append(monthsDiv);
-  
- 
+
   body[0].append(calendarDiv);
 
   return calendarDiv;
 }
-function addDays(maxDays) {
-    let daysDiv = document.createElement('div');
-    for (let i = 1; i <= maxDays; i++) {
-        
-        daysDiv.classList.add("days");
-        let dayDiv = document.createElement('div');
-        dayDiv.classList.add("day");
-        dayDiv.textContent = i.toString();
-        daysDiv.append(dayDiv);
-        
-    }
-    return daysDiv;
 
+function addDays(maxDays, indexOfStartDay) {
+  let daysDiv = document.createElement("div");
+  let counter = 1;
+  maxDays = maxDays + indexOfStartDay - 1;
+  for (let i = 1; i <= maxDays; i++) {
+    daysDiv.classList.add("days");
+    let dayDiv = document.createElement("div");
+    dayDiv.classList.add("day");
+    if (i >= indexOfStartDay) {
+      let dayBeforeTheTenth = counter.toString().padStart(2, "0");
+      let dayAfterTheTenth = counter.toString();
+      counter < 10
+        ? (dayDiv.textContent = dayBeforeTheTenth)
+        : (dayDiv.textContent = dayAfterTheTenth);
+      counter++;
+    }
+
+    daysDiv.append(dayDiv);
+  }
+  return daysDiv;
 }
 
 function createMonths(calendarMonth) {
@@ -66,26 +102,27 @@ function createMonths(calendarMonth) {
   h2.textContent = calendarMonth;
   monthDiv.append(h2);
   monthDiv.append(getWeekDays());
+  let maxDays;
+  let startDay;
+  let indexOfStartDay;
+  let indexOfCalendarMonth = getIndexOfCalendarMonth(calendarMonth);
 
-  for (const month in calendar.months) {
-    let maxDays = calendar.months[month].totalDays;
-    monthDiv.append(addDays(maxDays))
-  }
+  maxDays = calendar.months[indexOfCalendarMonth].totalDays;
+  startDay = calendar.months[indexOfCalendarMonth].firstDay;
+  indexOfStartDay = getIndexOfDay(startDay);
+  monthDiv.append(addDays(maxDays, indexOfStartDay));
 
   return monthDiv;
 }
 
-function getWeekDays() {
-  let weekdays = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+function getIndexOfCalendarMonth(calendarMonth) {
+  const index = calendar.months.findIndex((month) => {
+    return month.name === calendarMonth;
+  });
+  return index;
+}
 
+function getWeekDays() {
   let monthsDaysHeader = document.createElement("div");
   monthsDaysHeader.classList.add("month-days-header");
   for (const weekday of weekdays) {
@@ -94,6 +131,11 @@ function getWeekDays() {
     monthsDaysHeader.append(weekDiv);
   }
   return monthsDaysHeader;
+}
+
+function getIndexOfDay(startDay) {
+  let indexOfStartDay = weekdays.indexOf(startDay);
+  return indexOfStartDay + 1;
 }
 
 main();

@@ -34,7 +34,7 @@ function genCalendar(year) {
             "August",
             "September",
             "October",
-            "Novemeber",
+            "November",
             "December",
         ][month];
     }
