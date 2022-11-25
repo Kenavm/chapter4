@@ -1,5 +1,3 @@
-const calendar = genCalendar(2022);
-console.log(calendar);
 const body = document.getElementsByTagName("body");
 
 function renderApp() {
@@ -10,59 +8,65 @@ function renderApp() {
 const app = renderApp();
 document.body.appendChild(app);
 
-let weekdays = [
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su",
-  ];
+let weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
-function main() {
-  let calendarDiv = createCalendar();
-  getMonthsElements(calendarDiv);
-  createDropdown();
-}
+let dropdownDiv = document.createElement("div");
+let dropdown = `<label for="cars">Year</label>
 
-function createDropdown() {
-    let dropdownDiv = document.createElement('div');
-    let dropdown = `<div class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown link
-    </a>
+  <select name="years" id="years">
+    <option value="2022">2022</option>
+    <option value="2023">2023</option>
+    <option value="2024">2024</option>
+    <option value="2025">2025</option>
   
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
-    </ul>
-  </div>`
+  </select>`;
 
-  dropdownDiv.innerHTML = dropdown;
-  body[0].append(dropdownDiv);
+dropdownDiv.innerHTML = dropdown;
+dropdownDiv.children[1].addEventListener("change", changeYear);
+
+body[0].append(dropdownDiv);
+
+function main(calendarYear) {
+  const calendar = genCalendar(calendarYear);
+  let calendarDiv = createCalendar(calendar);
+  getMonthsElements(calendarDiv, calendar);
 }
 
-function createCalendar() {
+function createCalendar(calendar) {
   let calendarDiv = document.createElement("div");
   calendarDiv.classList.add("calendar");
   let h1 = document.createElement("h1");
   h1.classList.add("year-title");
-  h1.textContent = "Year 2022";
+  console.log(calendar);
+  h1.textContent = `Year ${calendar.year}`;
   calendarDiv.append(h1);
   body[0].append(calendarDiv);
 
   return calendarDiv;
 }
 
-function getMonthsElements(calendarDiv) {
+function changeYear() {
+  let year = document.getElementById("years").value;
+  let calendar = document.getElementsByClassName("calendar");
+
+  calendar[0].remove();
+  function renderApp() {
+    const element = document.createElement("div");
+    return element;
+  }
+
+  const app = renderApp();
+  document.body.appendChild(app);
+  main(year);
+}
+
+function getMonthsElements(calendarDiv, calendar) {
   let monthsDiv = document.createElement("div");
   monthsDiv.classList.add("months");
 
   for (const month in calendar.months) {
     let calendarMonth = calendar.months[month].name;
-    monthsDiv.append(createMonths(calendarMonth));
+    monthsDiv.append(createMonths(calendarMonth, calendar));
   }
 
   calendarDiv.append(monthsDiv);
@@ -75,7 +79,8 @@ function getMonthsElements(calendarDiv) {
 function addDays(maxDays, indexOfStartDay) {
   let daysDiv = document.createElement("div");
   let counter = 1;
-  maxDays = maxDays + indexOfStartDay - 1;
+
+  maxDays = maxDays + indexOfStartDay;
   for (let i = 1; i <= maxDays; i++) {
     daysDiv.classList.add("days");
     let dayDiv = document.createElement("div");
@@ -94,7 +99,7 @@ function addDays(maxDays, indexOfStartDay) {
   return daysDiv;
 }
 
-function createMonths(calendarMonth) {
+function createMonths(calendarMonth, calendar) {
   let monthDiv = document.createElement("div");
   monthDiv.classList.add("month");
   let h2 = document.createElement("h2");
@@ -105,7 +110,7 @@ function createMonths(calendarMonth) {
   let maxDays;
   let startDay;
   let indexOfStartDay;
-  let indexOfCalendarMonth = getIndexOfCalendarMonth(calendarMonth);
+  let indexOfCalendarMonth = getIndexOfCalendarMonth(calendarMonth, calendar);
 
   maxDays = calendar.months[indexOfCalendarMonth].totalDays;
   startDay = calendar.months[indexOfCalendarMonth].firstDay;
@@ -115,7 +120,7 @@ function createMonths(calendarMonth) {
   return monthDiv;
 }
 
-function getIndexOfCalendarMonth(calendarMonth) {
+function getIndexOfCalendarMonth(calendarMonth, calendar) {
   const index = calendar.months.findIndex((month) => {
     return month.name === calendarMonth;
   });
@@ -134,8 +139,9 @@ function getWeekDays() {
 }
 
 function getIndexOfDay(startDay) {
+  startDay = startDay.slice(0, 2);
   let indexOfStartDay = weekdays.indexOf(startDay);
   return indexOfStartDay + 1;
 }
 
-main();
+main(2022);
