@@ -1,21 +1,119 @@
+body {
+  font-family: "Inconsolata", monospace;
+}
+
 main {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .post {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 10px; 
-    padding: 20px;
-    margin: 25px;
-    width: 20em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 25px;
+  width: 40vw;
 }
 
 button {
-    background-color: gray;
-    color: white;
-    border: none;
-    font-size: 16px;
-    size: 15px;
+  background-color: gray;
+  color: white;
+  border: none;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.button-container {
+  background-color: gray;
+  display: inline-flex;
+  margin-top: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+footer {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#new-post {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 25px;
+  width: 25vw;
+  height: 30vh;
+}
+
+.edit-post {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.edit-post-submit {
+  width: 10vh;
+  border: none;
+}
+
+.form-input {
+  border: none;
+  height: 3vh;
+}
+
+.edit-post-input-body {
+  height: 50px;
+}
+
+.sub-headers {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.new-post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.timestamp-autor {
+    display: flex;
+
+}
+
+.post-title {
+    margin-bottom: 0px;
+}
+
+.post-body {
     margin-top: 20px;
+}
+
+.post-timestamp {
+    color:lightgray;
+}
+
+.by {
+    color: lightgray;
+}
+
+.post-author {
+    color: lightgray;
 }
