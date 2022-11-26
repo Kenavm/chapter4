@@ -57,26 +57,24 @@ function formatDate(date) {
   
   function createHTMLElements() {
     let holidayContainer = document.getElementById("holidays");
+    holidayContainer.classList.add("holiday");
   
     for (const holiday of HOLIDAYS) {
-      holidayContainer.append(createHolidayElements(holiday));
+      createHolidayElements(holiday, holidayContainer);
     }
   }
   
-  function createHolidayElements(holiday) {
-    let holidayDiv = document.createElement("div");
-    let holidayName = holiday.name;
+  function createHolidayElements(holiday, holidayContainer) {
+
+    let holidayName = document.createElement("div");
+    holidayName = holiday.name;
   
     let heading = document.createElement("h2");
     heading.textContent = holidayName.replace(/-/g, " ");
   
-    holidayDiv.classList.add(holidayName);
-  
-    let name = document.createElement("div");
-    name.classList.add("name");
-  
     let date = document.createElement("div");
     date.classList.add("date");
+    date.textContent = formatDate(holiday.date);
   
     let countdown = document.createElement("div");
     countdown.classList.add("countdown");
@@ -84,11 +82,20 @@ function formatDate(date) {
     setInterval(function () {
       countdown.textContent = getCountdownTime(holiday.date);
     }, 500);
-    holidayDiv.appendChild(heading);
-    holidayDiv.appendChild(name);
-    holidayDiv.appendChild(date);
-    holidayDiv.appendChild(countdown);
-  
-    return holidayDiv;
+    holidayContainer.appendChild(heading);
+    holidayContainer.appendChild(date);
+    holidayContainer.appendChild(countdown);
+
+   
   }
-  
+
+  /*
+  <!-- EXAMPLE HOLIDAY ELEMENT -->
+  <!-- <div class="holiday"> -->
+  <!--     <div class="name">Christmas</div> -->
+  <!--     <div class="date">24.12.2022</div> -->
+  <!--     <div class="countdown"> -->
+  <!--         2 months, 11 days, 10 hours, 21 minutes, and 16 seconds -->
+  <!--     </div> -->
+  <!-- </div> -->
+  */
