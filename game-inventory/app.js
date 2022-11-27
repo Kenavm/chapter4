@@ -1,6 +1,7 @@
 const INVENTORY = {
     sword: 1,
     potion: 2,
+    torch: 2
 };
 
 addItemsToInventory(INVENTORY, [
@@ -13,5 +14,4 @@ addItemsToInventory(INVENTORY, [
 
 removeItemsFromInventory(INVENTORY, ["torch", "bomb"]);
 
-console.log(displayInventory(INVENTORY));
-console.log(displayInventoryTable(INVENTORY));
+

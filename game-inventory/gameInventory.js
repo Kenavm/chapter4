@@ -18,29 +18,44 @@
  * @param {Inventory} inventory
  * @returns {string}
  */
-function displayInventory(inventory) {}
+function displayInventory(inventory) {
+  let inventoryString = "";
+  for (const item in inventory) {
+    inventoryString += `${item}: ${inventory[item]}\n`;
+  }
+
+  return inventoryString;
+}
 
 /**
  * @param {Inventory} inventory
  * @param {"asc" | "desc" | undefined} order
  * @returns {string}
  */
+
 function displayInventoryTable(inventory) {}
 
 /**
  * @param {Inventory} inventory
  * @param {string[]} itemsToAdd
  */
-function addItemsToInventory(inventory, itemsToAdd) {}
+function addItemsToInventory(inventory, itemsToAdd) {
+  for (const item in inventory) {
+    for (const itemToAdd of itemsToAdd) {
+      if (!(itemToAdd in inventory)) {
+        inventory[itemToAdd] = 1;
+      } else if (itemToAdd === item) {
+        inventory[item]++;
+      }
+    }
+  }
+}
 
 /**
  * @param {Inventory} inventory
  * @param {string[]} itemsToRemove
  */
-function removeItemsFromInventory(
-    inventory,
-    itemsToRemove,
-) {}
+function removeItemsFromInventory(inventory, itemsToRemove) {}
 
 /**
  * @param {string} text
