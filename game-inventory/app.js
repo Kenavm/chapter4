@@ -1,7 +1,6 @@
 const INVENTORY = {
     sword: 1,
     potion: 2,
-    torch: 2
 };
 
 addItemsToInventory(INVENTORY, [
@@ -12,6 +11,6 @@ addItemsToInventory(INVENTORY, [
     "bomb",
 ]);
 
-removeItemsFromInventory(INVENTORY, ["torch", "bomb"]);
 
-
+importInventory("sword, potion, potion, shield");
+exportInventory(INVENTORY);
