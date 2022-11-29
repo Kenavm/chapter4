@@ -8,45 +8,54 @@ Use our importInventory function to import the items from the input field into a
 
 let itemInputField = document.getElementById("inventory");
 
+itemInputField.addEventListener("change", addItem);
 
-
-itemInputField.addEventListener("change", addItems);
-
-function addItems() {
+function addItem() {
   let itemList = itemInputField.value;
   let inventoryDisplay = document.getElementById("inventory-display");
-
+  let inventoryItems = document.getElementById("inventory-items");
   if (itemList != "") {
     inventory = importInventory(itemList);
   }
-  createHTMLElements(inventory);
+
+  inventoryItems.append(createHTMLElements(inventory, itemList));
 
   inventoryDisplay.innerText = displayInventory(inventory);
 }
 
-function createHTMLElements(inventory) {
-  let inventoryItems = document.getElementById("inventory-items");
-
+function createHTMLElements(inventory, itemlist) {
   for (const item in inventory) {
-    if (!inventory[item]) {
+   
       let itemContainer = document.createElement("div");
       itemContainer.classList.add("item");
       let itemDiv = document.createElement("div");
+
       itemDiv.innerText = `${item} x ${inventory[item]}`;
+      itemContainer.append(itemDiv);
+
       let addButton = "<button>Add</button>";
+      itemContainer.append(addButtons(addButton, inventory, itemlist));
+
       let removeButton = "<button>Remove</button>";
+      itemContainer.append(addButtons(removeButton, inventory, itemlist));
     
-      itemDiv.innerHTML = addButton.trim();
-      itemDiv[1].addEventListener("click", addItems);
-      itemDiv.innerHTML = removeButton.trim();
-      itemDiv[2].addEventListener("click", removeItems);
-      inventoryItems.append(itemDiv);
-    } else {
-        inventory[item]++;
+      return itemContainer;
     }
-  } 
+}
+ 
+function addButtons(buttonString, inventory, itemList) {
+  let div = document.createElement("div");
+  div.innerHTML = buttonString.trim();
+  if(buttonString.includes("Add")) {
+    div.firstChild.addEventListener("click", function() {addItemsToInventory(inventory, itemList)});
+  } else {
+    div.firstChild.addEventListener("click", function()  {removeItemsFromInventory(inventory, itemList)});
+  }
+  return div.firstChild;
 }
 
-function removeItems() {
-
+function refreshInventoryList() {
+  
 }
+
+function removeItem() {}
