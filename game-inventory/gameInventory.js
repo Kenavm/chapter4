@@ -14,10 +14,13 @@
  * @typedef {Record<string, number>} Inventory
  */
 
+ let inventory = {};
+
 /**
  * @param {Inventory} inventory
  * @returns {string}
  */
+
 function displayInventory(inventory) {
   let inventoryString = "";
   for (const item in inventory) {
@@ -68,17 +71,12 @@ function removeItemsFromInventory(inventory, itemsToRemove) {
  * @returns {Inventory}
  */
 function importInventory(text) {
+
   let itemList = text.split(", ");
-
-  const inventory = {};
-
-  for (const item of itemList) {
-    if (inventory[item]) {
-      inventory[item]++;
-    } else {
-      inventory[item] = 1;
-    }
-  }
+ 
+  
+  addItemsToInventory(inventory, itemList);
+  
   return inventory;
 }
 
