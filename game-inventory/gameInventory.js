@@ -13,45 +13,35 @@
  *
  * @typedef {Record<string, number>} Inventory
  */
-
+ 
  let inventory = {};
-
+ 
 /**
  * @param {Inventory} inventory
  * @returns {string}
  */
-
-function displayInventory(inventory) {
-  let inventoryString = "";
-  for (const item in inventory) {
-    inventoryString += `${item}: ${inventory[item]}\n`;
-  }
-
-  return inventoryString;
-}
-
+ 
 /**
  * @param {Inventory} inventory
  * @param {"asc" | "desc" | undefined} order
  * @returns {string}
  */
-
+ 
 function displayInventoryTable(inventory) {}
-
+ 
 /**
  * @param {Inventory} inventory
  * @param {string[]} itemsToAdd
  */
-function addItemsToInventory(inventory, itemsToAdd) {
-  for (const itemToAdd of itemsToAdd) {
-    if (!inventory[itemToAdd]) {
-      inventory[itemToAdd] = 1;
-    } else {
-      inventory[itemToAdd]++;
-    }
+function addItemToInventory(itemToAdd) {
+  if (!inventory[itemToAdd]) {
+    inventory[itemToAdd] = 1;
+  } else {
+    inventory[itemToAdd]++;
   }
+ 
 }
-
+ 
 /**
  * @param {Inventory} inventory
  * @param {string[]} itemsToRemove
@@ -65,33 +55,29 @@ function removeItemsFromInventory(inventory, itemsToRemove) {
     }
   }
 }
-
+ 
 /**
  * @param {string} text
  * @returns {Inventory}
  */
-function importInventory(text) {
-
-  let itemList = text.split(", ");
- 
-  
-  addItemsToInventory(inventory, itemList);
-  
+function importInventory(itemsArray) {
+  itemsArray.forEach((item) => addItemToInventory(item));
   return inventory;
 }
-
+ 
 /**
  * @param {Inventory} inventory
  * @returns {string}
  */
 function exportInventory(inventory) {
   let itemArray = [];
-
+ 
   for (const item in inventory) {
     for (let i = 0; i < inventory[item]; i++) {
         itemArray.push(item);
     }
   }
-  
+ 
   return itemArray.join(", ");
 }
+ 
