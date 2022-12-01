@@ -34,8 +34,9 @@ function createInventoryDisplay() {
 function createInventoryItems() {
   let rows = [];
   for (const item in inventory) {
+    const tableRow = document.createElement("div");
+    tableRow.classList.add("inventory-item");
     const itemLabel = document.createElement("label");
-    itemLabel.htmlFor = item;
     itemLabel.innerText = item;
     const addButton = document.createElement("button");
     addButton.id = item;
@@ -44,13 +45,26 @@ function createInventoryItems() {
       addItemToInventory(item); 
       createInventoryDisplay(); 
     })
-    const tableRow = document.createElement("div");
-    tableRow.className = "inventory-item";
+    let removeButton = document.createElement("button");
+    removeButton.id = item;
+    removeButton.innerText = "Remove";
+    removeButton.addEventListener("click", () => {
+    let lastItem = removeItemsFromInventory(item);
+    if (lastItem) {
+      deleteTableRow(tableRow);
+    }
+      createInventoryDisplay();
+    })
+    
     tableRow.appendChild(addButton);
+    tableRow.appendChild(removeButton);
     tableRow.appendChild(itemLabel);
     rows.push(tableRow);
   }
   inventoryItems.replaceChildren(...rows);
 }
  
-function removeItem() {}
+
+function deleteTableRow(tableRow) {
+  tableRow.remove();
+}
